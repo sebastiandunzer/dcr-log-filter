@@ -3,6 +3,12 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Log extensions
+*.xes
+
+# pickle
+/model_translator/Resources/pickle/*
+
 # C extensions
 *.so
 
