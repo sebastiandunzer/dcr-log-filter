@@ -1,4 +1,4 @@
-<dcrgraph title="BPI2019_less" dataTypesStatus="hide" filterLevel="-1" insightFilter="false" zoomLevel="0" formGroupStyle="Normal" formLayoutStyle="Horizontal" formShowPendingCount="true" graphBG="#f1f6fe" graphType="0" exercise="false">
+<dcrgraph title="BPI2019_loose" dataTypesStatus="hide" filterLevel="-1" insightFilter="false" zoomLevel="0" formGroupStyle="Normal" formLayoutStyle="Horizontal" formShowPendingCount="true" graphBG="#f1f6fe" graphType="0" exercise="false">
     <meta>
         <graph id="1699284" hash="806586A7B57612E09079093CEE971DAB" guid="68504C41-883C-47B4-92FE-BD5DD3185C79" OwnerName="Sebastian Dunzer" OwnerId="1257" categoryId="1693" categoryTitle="Default" Keywords=""/>
         <revision id="3288972" type="minor" date="2023-08-23T00:59:44.413"/>

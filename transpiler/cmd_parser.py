@@ -13,11 +13,12 @@ def parse_args():
     parser = argparse.ArgumentParser(prog='main.py', usage='main.py [options]')
     parser.add_argument('--eventLog', nargs='?', default='Resources/BPI2019.xes',
                         help='The path pulling the event log')
-    parser.add_argument('--XmlDcr', nargs="?", default='Resources/BPI2019_medium.xml',
+    parser.add_argument('--XmlDcr', nargs="?", default='Resources/BPI2019_loose.xml',
                         help='The input path for the DCR Graph xml')
     parser.add_argument('--output', nargs='?')
     parser.add_argument('--namespace', nargs='?', default='')
-    parser.add_argument('--outFile', nargs='?', default="Resources/BPI2019_happy_prep.xes")
+    parser.add_argument('--outFile', nargs='?', default="Resources/BPI2019_loose_prep.xes")
     parser.add_argument('--importModel', nargs='?', default="")
+    parser.add_argument('--minerName',nargs='?', default="")
 
     return parser.parse_args()

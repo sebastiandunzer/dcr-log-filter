@@ -13,7 +13,7 @@ from marking import Marking
 from xml.etree import ElementTree as Etree
 from pm4py.algo.conformance.tokenreplay import algorithm as token_replay
 from pm4py.conformance import precision_token_based_replay
-from pm4py.objects.process_tree import importer
+from pm4py.objects.petri_net import importer
 import pm4py.convert
 
 from sklearn.metrics import classification_report
@@ -22,7 +22,7 @@ from pandas import DataFrame
 
 import pm4py.discovery as discovery
 import pm4py.objects.log.importer as xes_importer
-import pm4py.visualization.petri_net as vis_factory
+
 
 
 miners = {
@@ -49,6 +49,7 @@ def main():
     ns = args.namespace
     dcr_graph = None
     model_import_path = args.importModel
+    miner_name = args.minerName
     import_successful = False
 
     name = xml_path.split('/')[-1].split('.')[0]
@@ -76,10 +77,8 @@ def main():
         clean_event_log(data_path, out_path, tau_v, ns)
 
     if model_import_path:
-        process_tree = importer.importer.apply("Resources/process_tree.ptml")
-        net, im, fm = pm4py.convert.convert_to_petri_net(process_tree)
-        pviz = vis_factory.visualizer.apply(net, im, fm)
-        pviz.view()
+        net, im, fm = importer.importer.apply(model_import_path)
+        verify_imported_model(data_path, tau_v, tau_c, name, net, im, fm, miner_name)
     else:
         verify(data_path, tau_v, tau_c, out_path, name)
 
@@ -201,9 +200,32 @@ def rule_checking(trace, ca):
         ca.append_conformance_data(trace_conformance_data)
 
 
+def verify_imported_model(log_file, tau_v, tau_c, name, net, im, fm, miner_name):
+    log = xes_importer.xes.importer.apply(log_file)
+    all_traces = sorted(tau_v + tau_c)
+    data_all_traces = convert_to_data_traces(all_traces, set(tau_v))
+
+    correct_traces, failed_traces = run_token_replay(net, im, fm, log)
+
+    all_traces_p = sorted(correct_traces + failed_traces)
+    data_all_traces_p = convert_to_data_traces(all_traces_p, set(failed_traces))
+
+    output_dict = classification_report(data_all_traces, data_all_traces_p, output_dict=True)
+    DataFrame(output_dict).to_csv(f"Results/results_{name}_{miner_name}.csv")
+
+    if failed_traces == tau_v:
+        print('Equivalent')
+    else:
+        print("Not Equivalent")
+        print(f"Detected {len(failed_traces)} failed traces instead of {len(tau_v)}")
+
+
 def verify(log_file, tau_v, tau_c, out_file, name):
     log = xes_importer.xes.importer.apply(log_file)
     log_d = xes_importer.xes.importer.apply(out_file)
+
+    all_traces = sorted(tau_v + tau_c)
+    data_all_traces = convert_to_data_traces(all_traces, set(tau_v))
 
     for miner in miners:
 
@@ -213,8 +235,6 @@ def verify(log_file, tau_v, tau_c, out_file, name):
 
         correct_traces, failed_traces = run_token_replay(net, im, fm, log)
 
-        all_traces = sorted(tau_v + tau_c)
-        data_all_traces = convert_to_data_traces(all_traces, set(tau_v))
         all_traces_p = sorted(correct_traces + failed_traces)
         data_all_traces_p = convert_to_data_traces(all_traces_p, set(failed_traces))
 

@@ -64,6 +64,7 @@ class DCRConnection(ABC):
             connection = Milestone(start_node, end_node)
         else:
             raise ValueError('connection was None')
+        return connection
 
     @abstractmethod
     def perform_transition(self, marking):
@@ -78,7 +79,7 @@ class DCRConnection(ABC):
 
 class Include(DCRConnection):
     """
-    The representation of an Include relations
+    The representation of an Include relationship
     :DCRConnection implementer
     """
 

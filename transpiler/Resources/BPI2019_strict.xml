@@ -1,7 +1,7 @@
 <dcrgraph title="BPI2019" dataTypesStatus="hide" filterLevel="-1" insightFilter="false" zoomLevel="0" formGroupStyle="Normal" formLayoutStyle="Horizontal" formShowPendingCount="true" graphBG="#f1f6fe" graphType="0" exercise="false">
     <meta>
-        <graph id="1699283" hash="5511DF07CB68C061CFC103C6033E84E3" guid="D5B2A41D-F9FC-4F03-BA8F-F4978B8BCFD4" OwnerName="Sebastian Dunzer" OwnerId="1257" categoryId="1693" categoryTitle="Default" Keywords=""/>
-        <revision id="3288934" type="minor" date="2023-08-22T23:10:37.637"/>
+        <graph id="1699283" hash="B61BFE9F869DC502DC669DAC636C93A1" guid="D5B2A41D-F9FC-4F03-BA8F-F4978B8BCFD4" OwnerName="Sebastian Dunzer" OwnerId="1257" categoryId="1693" categoryTitle="Default" Keywords=""/>
+        <revision id="3288973" type="minor" date="2023-08-23T00:59:55.333"/>
         <organization id="1" name="Community"/>
     </meta>
     <specification>
@@ -11,7 +11,7 @@
                     <precondition message=""/>
                     <custom>
                         <visualization>
-                            <location xLoc="250" yLoc="225"/>
+                            <location xLoc="250" yLoc="275"/>
                             <colors bg="#f9f7ed" textStroke="#000000" stroke="#cccccc"/>
                         </visualization>
                         <roles>
@@ -44,7 +44,7 @@
                     <precondition message=""/>
                     <custom>
                         <visualization>
-                            <location xLoc="450" yLoc="225"/>
+                            <location xLoc="450" yLoc="275"/>
                             <colors bg="#f9f7ed" textStroke="#000000" stroke="#cccccc"/>
                         </visualization>
                         <roles>
@@ -77,7 +77,7 @@
                     <precondition message=""/>
                     <custom>
                         <visualization>
-                            <location xLoc="450" yLoc="425"/>
+                            <location xLoc="450" yLoc="475"/>
                             <colors bg="#f9f7ed" textStroke="#000000" stroke="#cccccc"/>
                         </visualization>
                         <roles>
@@ -110,7 +110,7 @@
                     <precondition message=""/>
                     <custom>
                         <visualization>
-                            <location xLoc="650" yLoc="225"/>
+                            <location xLoc="650" yLoc="275"/>
                             <colors bg="#f9f7ed" textStroke="#000000" stroke="#cccccc"/>
                         </visualization>
                         <roles>
@@ -143,7 +143,7 @@
                     <precondition message=""/>
                     <custom>
                         <visualization>
-                            <location xLoc="450" yLoc="25"/>
+                            <location xLoc="450" yLoc="75"/>
                             <colors bg="#f9f7ed" textStroke="#000000" stroke="#cccccc"/>
                         </visualization>
                         <roles>
@@ -176,7 +176,7 @@
                     <precondition message=""/>
                     <custom>
                         <visualization>
-                            <location xLoc="850" yLoc="25"/>
+                            <location xLoc="850" yLoc="75"/>
                             <colors bg="#f9f7ed" textStroke="#000000" stroke="#cccccc"/>
                         </visualization>
                         <roles>
@@ -209,7 +209,7 @@
                     <precondition message=""/>
                     <custom>
                         <visualization>
-                            <location xLoc="650" yLoc="25"/>
+                            <location xLoc="650" yLoc="75"/>
                             <colors bg="#f9f7ed" textStroke="#000000" stroke="#cccccc"/>
                         </visualization>
                         <roles>
@@ -242,7 +242,7 @@
                     <precondition message=""/>
                     <custom>
                         <visualization>
-                            <location xLoc="650" yLoc="425"/>
+                            <location xLoc="650" yLoc="475"/>
                             <colors bg="#f9f7ed" textStroke="#000000" stroke="#cccccc"/>
                         </visualization>
                         <roles>
@@ -275,7 +275,7 @@
                     <precondition message=""/>
                     <custom>
                         <visualization>
-                            <location xLoc="50" yLoc="225"/>
+                            <location xLoc="50" yLoc="275"/>
                             <colors bg="#f9f7ed" textStroke="#000000" stroke="#cccccc"/>
                         </visualization>
                         <roles>
@@ -308,7 +308,7 @@
                     <precondition message=""/>
                     <custom>
                         <visualization>
-                            <location xLoc="300" yLoc="25"/>
+                            <location xLoc="300" yLoc="75"/>
                             <colors bg="#f9f7ed" textStroke="#000000" stroke="#cccccc"/>
                         </visualization>
                         <roles>
@@ -341,7 +341,7 @@
                     <precondition message=""/>
                     <custom>
                         <visualization>
-                            <location xLoc="850" yLoc="425"/>
+                            <location xLoc="850" yLoc="475"/>
                             <colors bg="#f9f7ed" textStroke="#000000" stroke="#cccccc"/>
                         </visualization>
                         <roles>
@@ -422,7 +422,9 @@
                 </graphFilters>
                 <hightlighterMarkup id="HLM"/>
                 <highlighterMarkup>
-                    <highlightLayers/>
+                    <highlightLayers>
+                        <highlightLayer default="true" name="description">DCR Process</highlightLayer>
+                    </highlightLayers>
                     <highlights/>
                 </highlighterMarkup>
             </custom>
@@ -480,9 +482,7 @@
                 <event id="Activity9_1"/>
                 <event id="Activity10"/>
             </included>
-            <pendingResponses>
-                <event id="Activity2"/>
-            </pendingResponses>
+            <pendingResponses/>
         </marking>
     </runtime>
 </dcrgraph>
