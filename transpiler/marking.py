@@ -54,7 +54,7 @@ class Marking(object):
         """
         return connection.perform_transition(self)
 
-    def perform_transition_node(self, node, event, trace_data):
+    def perform_transition_node(self, node):
         """
         Performs a transition on a marking and a connection
         :param trace_data:
@@ -63,19 +63,17 @@ class Marking(object):
         :return:
         """
         if node is None:
-            return True  # Global variable
-        if hasattr(node, "Activities"):
-            trace_data.add_violating_nesting_activity_occurred(node.ActivityName)
+            return False
 
-        if self.node_is_blocked(node, trace_data, event):
-            trace_data.add_violating_activity(node.ActivityName)
+        if self.node_is_blocked(node):
+            return True
 
         if node.NestingActivity is not None:
-            if self.node_is_blocked(node.NestingActivity, trace_data, event):
-                trace_data.add_violating_nesting_activity_blocked(node)
+            if self.node_is_blocked(node.NestingActivity):
+                return True
 
         if node not in self.Included:
-            trace_data.add_violating_activity(node.ActivityName)
+            return True
 
         if node not in self.Executed:
             self.Executed.append(node)
@@ -91,9 +89,6 @@ class Marking(object):
                 if not pending and node.NestingActivity in self.PendingResponse:
                     self.PendingResponse.remove(node.NestingActivity)
 
-        if len(node.Roles) > 0:
-            if event.Role not in node.Roles:
-                trace_data.add_violating_role(event.Role, node.Roles[0])
 
         connections = self.dcr_graph.get_connections_outgoing(node.ActivityId)
         if node.NestingActivity is not None:
@@ -101,7 +96,9 @@ class Marking(object):
         for connection in connections:
                 self.perform_transition_connection(connection)
 
-    def node_is_blocked(self, node, trace_data, event):
+        return False
+
+    def node_is_blocked(self, node):
         """
         Checks if the node is blocked in the current constellation of the marking
         :param event: The event from the event log
@@ -109,7 +106,6 @@ class Marking(object):
         :param node: The node to be checked
         :return: True if blocked, False if not
         """
-        blocked = False
         # Check only if the node is a milestone target
         if node.IsMilestoneTarget:
             milestones = self.dcr_graph.get_connections_incoming(node.ActivityId, conn.Milestone)
@@ -118,10 +114,7 @@ class Marking(object):
                 # the target is blocked
                 if milestone.StartNode in self.Included and \
                         milestone.StartNode in self.PendingResponse:
-                    blocked = True
-                    trace_data.add_violating_connection(
-                        "milestone-{}-{}".format(milestone.StartNode.ActivityName,
-                                                 milestone.EndNode.ActivityName))
+                    return True
         # Check only if the node is a condition target
         if node.IsConditionTarget:
             conditions = self.dcr_graph.get_connections_incoming(node.ActivityId, conn.Condition)
@@ -130,11 +123,8 @@ class Marking(object):
                 # as well as not executed yet the activity is blocked
                 if condition.StartNode in self.Included \
                         and condition.StartNode not in self.Executed:
-                    blocked = True
-                    trace_data.add_violating_connection(
-                        "condition-{}-{}".format(condition.StartNode.ActivityName,
-                                                 condition.EndNode.ActivityName))
-        return blocked
+                    return True
+        return False
 
     def get_included_activities(self, activities: []):
         """

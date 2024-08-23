@@ -17,7 +17,5 @@ def parse_args():
                         help='The input path for the DCR Graph xml')
     parser.add_argument('--namespace', nargs='?', default='')
     parser.add_argument('--outFile', nargs='?', default="")
-    parser.add_argument('--importModel', nargs='?', default="")
-    parser.add_argument('--minerName',nargs='?', default="")
 
     return parser.parse_args()

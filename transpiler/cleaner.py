@@ -1,6 +1,6 @@
 from xml.etree import ElementTree as Etree
 
-def clean_event_log(event_log_path, output_file_name, trace_list, ns=''):
+def filter_event_log(event_log_path, output_file_name, trace_list, ns=''):
     event_log = Etree.parse(event_log_path)
     root = event_log.getroot()
     all_traces = root.findall(ns + 'trace')
